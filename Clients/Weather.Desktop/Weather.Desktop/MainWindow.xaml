@@ -1,0 +1,38 @@
+﻿<Window x:Class="Weather.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Weather.Desktop"
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0" ItemsSource="{Binding Cities}"
+                 SelectedItem="{Binding SelectedCity}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5" >
+                        <TextBlock FontSize="18" Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Column="1" DataContext="{Binding SelectedWeather}" Visibility="{Binding Path=., TargetNullValue=Collapsed }">
+            <TextBlock TextAlignment="Center" Text="Погода на завтра"  />
+            <TextBlock Text="Дата:" />
+            <TextBlock Text="{Binding Date}" />
+            <TextBlock Text="Минимальная температура" />
+            <TextBlock Text="{Binding MinTemperature}" />
+            <TextBlock Text="Максимальная температура" />
+            <TextBlock Text="{Binding MaxTemperature}" />
+        </StackPanel>
+    </Grid>
+</Window>
