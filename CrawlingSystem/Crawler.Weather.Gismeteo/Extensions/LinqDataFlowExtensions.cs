@@ -21,7 +21,7 @@ namespace CrawlingSystem.Crawler.Weather.Extensions
         {
             var transformBlock = new TransformBlock<TInput, TOutput>(transform, new ExecutionDataflowBlockOptions()
             {
-                MaxDegreeOfParallelism = 10
+                MaxDegreeOfParallelism = Environment.ProcessorCount + 1
             });
             source.LinkTo(transformBlock, new DataflowLinkOptions { PropagateCompletion = true });
 
@@ -33,7 +33,7 @@ namespace CrawlingSystem.Crawler.Weather.Extensions
         {
             var actionBlock = new ActionBlock<TInput>(action, new ExecutionDataflowBlockOptions()
             {
-                MaxDegreeOfParallelism = 10
+                MaxDegreeOfParallelism = Environment.ProcessorCount + 1
             });
             source.LinkTo(actionBlock, new DataflowLinkOptions { PropagateCompletion = true });
 
